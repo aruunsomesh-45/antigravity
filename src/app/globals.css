@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -14,6 +12,13 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+@theme {
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-600: #ca8a04;
+  --color-cream-100: #fef9c3;
 }
 
 body {

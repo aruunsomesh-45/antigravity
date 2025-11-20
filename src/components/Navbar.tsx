@@ -15,7 +15,7 @@ export function Navbar() {
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <Link href="/" className="text-2xl font-serif tracking-widest text-gold-400">
+                        <Link href="/" className="text-2xl font-serif tracking-widest text-gold-400" suppressHydrationWarning>
                             ZOKU
                         </Link>
                     </div>
@@ -33,7 +33,7 @@ export function Navbar() {
 
                     {/* Icons */}
                     <div className="hidden md:flex items-center gap-6">
-                        <button className="hover:text-gold-400 transition-colors">
+                        <button className="hover:text-gold-400 transition-colors" suppressHydrationWarning>
                             <ShoppingBag className="w-6 h-6" />
                         </button>
                     </div>
@@ -43,6 +43,7 @@ export function Navbar() {
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="text-cream-100 hover:text-gold-400 p-2"
+                            suppressHydrationWarning
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
@@ -78,6 +79,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
         <Link
             href={href}
             className="text-sm uppercase tracking-widest hover:text-gold-400 transition-colors duration-300"
+            suppressHydrationWarning
         >
             {children}
         </Link>
@@ -90,6 +92,7 @@ function MobileNavLink({ href, onClick, children }: { href: string; onClick: () 
             href={href}
             onClick={onClick}
             className="block px-3 py-4 text-base font-medium text-cream-100 hover:text-gold-400 hover:bg-white/5 border-b border-white/5 last:border-0"
+            suppressHydrationWarning
         >
             {children}
         </Link>

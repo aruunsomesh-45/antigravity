@@ -18,10 +18,10 @@ export function Footer() {
                     <div>
                         <h4 className="text-gold-400 uppercase tracking-widest text-sm mb-6">Explore</h4>
                         <ul className="space-y-3 text-sm">
-                            <li><Link href="/shop" className="hover:text-white transition-colors">Shop All</Link></li>
-                            <li><Link href="/collections" className="hover:text-white transition-colors">Collections</Link></li>
-                            <li><Link href="/royal-combos" className="hover:text-white transition-colors">Royal Combos</Link></li>
-                            <li><Link href="/new-arrivals" className="hover:text-white transition-colors">New Arrivals</Link></li>
+                            <li><Link href="/shop" className="hover:text-white transition-colors" suppressHydrationWarning>Shop All</Link></li>
+                            <li><Link href="/collections" className="hover:text-white transition-colors" suppressHydrationWarning>Collections</Link></li>
+                            <li><Link href="/royal-combos" className="hover:text-white transition-colors" suppressHydrationWarning>Royal Combos</Link></li>
+                            <li><Link href="/new-arrivals" className="hover:text-white transition-colors" suppressHydrationWarning>New Arrivals</Link></li>
                         </ul>
                     </div>
 
@@ -29,10 +29,10 @@ export function Footer() {
                     <div>
                         <h4 className="text-gold-400 uppercase tracking-widest text-sm mb-6">Support</h4>
                         <ul className="space-y-3 text-sm">
-                            <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                            <li><Link href="/shipping" className="hover:text-white transition-colors">Shipping & Returns</Link></li>
-                            <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-                            <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition-colors" suppressHydrationWarning>Contact Us</Link></li>
+                            <li><Link href="/shipping" className="hover:text-white transition-colors" suppressHydrationWarning>Shipping & Returns</Link></li>
+                            <li><Link href="/faq" className="hover:text-white transition-colors" suppressHydrationWarning>FAQ</Link></li>
+                            <li><Link href="/privacy" className="hover:text-white transition-colors" suppressHydrationWarning>Privacy Policy</Link></li>
                         </ul>
                     </div>
 
@@ -45,8 +45,9 @@ export function Footer() {
                                 type="email"
                                 placeholder="Enter your email"
                                 className="bg-white/5 border border-white/10 px-4 py-2 text-sm focus:outline-none focus:border-gold-400 transition-colors"
+                                suppressHydrationWarning
                             />
-                            <button className="bg-gold-400 text-black px-4 py-2 text-sm font-medium uppercase tracking-wider hover:bg-gold-300 transition-colors">
+                            <button className="bg-gold-400 text-black px-4 py-2 text-sm font-medium uppercase tracking-wider hover:bg-gold-300 transition-colors" suppressHydrationWarning>
                                 Subscribe
                             </button>
                         </form>

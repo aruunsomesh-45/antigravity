@@ -20,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
             viewport={{ once: true }}
             className="group relative"
         >
-            <Link href={`/product/${product.id}`}>
+            <Link href={`/product/${product.id}`} suppressHydrationWarning>
                 <div className="aspect-[3/4] relative overflow-hidden bg-white/5">
                     {/* Image Placeholder - In real app, use actual images */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20 z-10" />
@@ -30,7 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
                     </div>
 
                     {/* Quick Add Button */}
-                    <button className="absolute bottom-0 left-0 right-0 bg-gold-400 text-black py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 font-medium uppercase tracking-widest z-20">
+                    <button className="absolute bottom-0 left-0 right-0 bg-gold-400 text-black py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 font-medium uppercase tracking-widest z-20" suppressHydrationWarning>
                         Add to Cart
                     </button>
                 </div>

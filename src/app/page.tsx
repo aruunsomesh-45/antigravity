@@ -3,10 +3,10 @@ import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 
 const FEATURED_PRODUCTS = [
-  { id: "1", name: "Midnight Oud", price: 129.00, image: "/images/p1.jpg", category: "Signature Collection" },
-  { id: "2", name: "Royal Rose", price: 149.00, image: "/images/p2.jpg", category: "Floral Collection" },
-  { id: "3", name: "Golden Amber", price: 189.00, image: "/images/p3.jpg", category: "Oud Collection" },
-  { id: "4", name: "Velvet Santal", price: 159.00, image: "/images/p4.jpg", category: "Signature Collection" },
+  { id: "1", name: "Midnight Oud", price: 129.00, image: "/images/featured-sauvage.jpg", category: "Signature Collection" },
+  { id: "2", name: "Royal Rose", price: 149.00, image: "/images/featured-sauvage.jpg", category: "Floral Collection" },
+  { id: "3", name: "Golden Amber", price: 189.00, image: "/images/featured-sauvage.jpg", category: "Oud Collection" },
+  { id: "4", name: "Velvet Santal", price: 159.00, image: "/images/featured-sauvage.jpg", category: "Signature Collection" },
 ];
 
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
           <p className="text-gray-300 max-w-2xl mx-auto mb-10">
             Curated sets for the ultimate fragrance experience. Perfect for gifting or personal indulgence.
           </p>
-          <a href="/collections/royal-combos" className="inline-block border-b border-gold-400 text-gold-400 pb-1 hover:text-cream-100 hover:border-cream-100 transition-colors">
+          <a href="/collections/royal-combos" className="inline-block border-b border-gold-400 text-gold-400 pb-1 hover:text-cream-100 hover:border-cream-100 transition-colors" suppressHydrationWarning>
             Explore Sets
           </a>
         </div>

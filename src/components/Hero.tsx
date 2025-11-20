@@ -2,12 +2,17 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ShaderAnimation } from "@/components/ui/shader-animation";
+import { SplitTextAnimation } from "@/components/ui/SplitText";
 
 export function Hero() {
     return (
         <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-            {/* Background Gradient/Image Placeholder */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-600/20 via-black to-black opacity-50" />
+            {/* Background Shader Animation */}
+            <div className="absolute inset-0 z-0">
+                <ShaderAnimation />
+                <div className="absolute inset-0 bg-black/40" /> {/* Overlay for text readability */}
+            </div>
 
             <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
                 <motion.div
@@ -19,7 +24,7 @@ export function Hero() {
                         The Essence of Royalty
                     </h2>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream-100 mb-8 tracking-tight">
-                        ZOKU <span className="text-gold-400">PERFUME</span>
+                        <SplitTextAnimation text="ZOKU PERFUME" delay={0.5} />
                     </h1>
                     <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                         Discover a collection of scents crafted for those who command the room.
@@ -30,12 +35,14 @@ export function Hero() {
                         <Link
                             href="/shop"
                             className="px-8 py-4 bg-gold-400 text-black font-medium uppercase tracking-widest hover:bg-gold-300 transition-all duration-300 transform hover:scale-105"
+                            suppressHydrationWarning
                         >
                             Shop Collection
                         </Link>
                         <Link
                             href="/collections/royal-combos"
                             className="px-8 py-4 border border-gold-400 text-gold-400 font-medium uppercase tracking-widest hover:bg-gold-400/10 transition-all duration-300"
+                            suppressHydrationWarning
                         >
                             View Royal Combos
                         </Link>
