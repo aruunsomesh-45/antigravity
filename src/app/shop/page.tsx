@@ -3,7 +3,6 @@
 import { ProductCard } from "@/components/ProductCard";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 // Mock Data
 const PRODUCTS = [
@@ -13,6 +12,7 @@ const PRODUCTS = [
     { id: "4", name: "Velvet Santal", price: 159.00, image: "/images/p4.jpg", category: "Signature Collection", notes: "Sandalwood, Cedar, Leather" },
     { id: "5", name: "Imperial Citrus", price: 119.00, image: "/images/p5.jpg", category: "Fresh Collection", notes: "Bergamot, Lemon, Neroli" },
     { id: "6", name: "Mystic Musk", price: 139.00, image: "/images/p6.jpg", category: "Signature Collection", notes: "Musk, Iris, Tonka" },
+    { id: "7", name: "Eclaire CGI Edition", price: 199.00, image: "/images/eclaire-cgi.jpg", category: "Signature Collection", notes: "Exquisite, Digital, Art" },
 ];
 
 const FILTERS = {
@@ -72,17 +72,6 @@ export default function ShopPage() {
                             ))}
                         </ul>
                     </div>
-
-                    {/* Promo Image */}
-                    <div className="mt-8 rounded-lg overflow-hidden">
-                        <Image
-                            src="/images/shop-promo.jpg"
-                            alt="Shop Promo"
-                            width={400}
-                            height={600}
-                            className="w-full h-auto object-cover"
-                        />
-                    </div>
                 </aside>
 
                 {/* Product Grid */}
@@ -98,7 +87,7 @@ export default function ShopPage() {
                         ))}
                     </div>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     );
 }
