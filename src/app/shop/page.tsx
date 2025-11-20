@@ -3,6 +3,7 @@
 import { ProductCard } from "@/components/ProductCard";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 // Mock Data
 const PRODUCTS = [
@@ -71,6 +72,17 @@ export default function ShopPage() {
                             ))}
                         </ul>
                     </div>
+
+                    {/* Promo Image */}
+                    <div className="mt-8 rounded-lg overflow-hidden">
+                        <Image
+                            src="/images/shop-promo.jpg"
+                            alt="Shop Promo"
+                            width={400}
+                            height={600}
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
                 </aside>
 
                 {/* Product Grid */}
@@ -86,7 +98,7 @@ export default function ShopPage() {
                         ))}
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
