@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Truck, ShieldCheck } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 // Mock Data (In real app, fetch from API)
 const PRODUCTS = {
@@ -25,6 +26,28 @@ export default function ProductPage() {
     const product = PRODUCTS[id as keyof typeof PRODUCTS] || PRODUCTS["1"]; // Fallback to first product
 
     const [quantity, setQuantity] = useState(1);
+    const [isAdded, setIsAdded] = useState(false);
+    const { addToCart } = useCart();
+
+    const handleAddToCart = () => {
+        // Add each quantity as separate items
+        for (let i = 0; i < quantity; i++) {
+            addToCart({
+                product: {
+                    id: product.id,
+                    name: product.name,
+                    slug: product.id,
+                    price: product.price,
+                    images: product.images,
+                    description: product.description,
+                    stock: 100,
+                },
+            });
+        }
+
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 2000);
+    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -93,8 +116,14 @@ export default function ProductPage() {
                                     +
                                 </button>
                             </div>
-                            <button className="flex-1 bg-gold-400 text-black py-3 px-8 font-medium uppercase tracking-widest hover:bg-gold-300 transition-colors">
-                                Add to Cart
+                            <button
+                                onClick={handleAddToCart}
+                                className={`flex-1 py-3 px-8 font-medium uppercase tracking-widest transition-all ${isAdded
+                                        ? 'bg-green-500 text-white'
+                                        : 'bg-gold-400 text-black hover:bg-gold-300'
+                                    }`}
+                            >
+                                {isAdded ? '✓ Added to Cart!' : 'Add to Cart'}
                             </button>
                         </div>
                     </div>

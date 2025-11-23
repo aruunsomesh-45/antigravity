@@ -3,26 +3,50 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core theme colors */
+  --background: 0 0% 0%;
+  --foreground: 0 0% 98%;
+
+  /* Chart colors */
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+
+  /* Custom color variables */
+  --sky-300: 203 92% 53%;
+  --gray-300: 0 0% 70%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Tailwind v4 theme configuration */
 @theme {
+  /* Gold color palette */
   --color-gold-300: #fde047;
   --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
   --color-gold-600: #ca8a04;
+
+  /* Cream color palette */
+  --color-cream-50: #fefce8;
   --color-cream-100: #fef9c3;
+  --color-cream-200: #fef08a;
+
+  /* Animation */
+  --animate-fade-in-long: fadeIn 1.2s ease-out;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
   font-family: Arial, Helvetica, sans-serif;
 }
