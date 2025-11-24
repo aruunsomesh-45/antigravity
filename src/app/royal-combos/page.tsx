@@ -57,11 +57,20 @@ export default function RoyalCombosPage() {
 
     const handleAddToCart = (combo: typeof COMBOS[0]) => {
         addToCart({
-            id: combo.id,
-            name: combo.name,
-            price: combo.price,
-            image: combo.image,
-            category: combo.category,
+            product: {
+                id: combo.id,
+                name: combo.name,
+                slug: combo.id,
+                price: combo.price,
+                images: [combo.image],
+                description: combo.backstory,
+                stock: 100,
+                category: {
+                    id: combo.category,
+                    name: combo.category,
+                    slug: combo.category.toLowerCase().replace(/\s+/g, '-'),
+                },
+            },
         });
 
         // Show feedback

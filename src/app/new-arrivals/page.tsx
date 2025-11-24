@@ -59,11 +59,20 @@ export default function NewArrivalsPage() {
 
     const handleAddToCart = (product: typeof NEW_ARRIVALS[0]) => {
         addToCart({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            category: product.category,
+            product: {
+                id: product.id,
+                name: product.name,
+                slug: product.id,
+                price: product.price,
+                images: [product.image],
+                description: product.backstory,
+                stock: 100,
+                category: {
+                    id: product.category,
+                    name: product.category,
+                    slug: product.category.toLowerCase().replace(/\s+/g, '-'),
+                },
+            },
         });
 
         setAddedItems(prev => new Set(prev).add(product.id));

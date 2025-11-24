@@ -25,11 +25,20 @@ export function ProductCard({ product }: { product: Product }) {
         e.stopPropagation();
 
         addToCart({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            category: product.category,
+            product: {
+                id: product.id,
+                name: product.name,
+                slug: product.id,
+                price: product.price,
+                images: [product.image],
+                description: product.category,
+                stock: 100,
+                category: {
+                    id: product.category,
+                    name: product.category,
+                    slug: product.category.toLowerCase().replace(/\s+/g, '-'),
+                },
+            },
         });
 
         // Show feedback
