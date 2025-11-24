@@ -4,6 +4,7 @@ import { useCart } from "@/contexts/CartContext";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import NextImage from "next/image";
 
 interface CartDropdownProps {
     isOpen: boolean;
@@ -70,9 +71,14 @@ export function CartDropdown({ isOpen, onClose }: CartDropdownProps) {
                                             className="bg-white/5 p-4 rounded-sm border border-white/10"
                                         >
                                             <div className="flex gap-4">
-                                                {/* Product Image Placeholder */}
-                                                <div className="w-20 h-20 bg-gray-800 flex-shrink-0 flex items-center justify-center">
-                                                    <span className="text-xs text-gray-600">IMG</span>
+                                                {/* Product Image */}
+                                                <div className="relative w-20 h-20 bg-gray-800 flex-shrink-0 overflow-hidden rounded-sm">
+                                                    <NextImage
+                                                        src={item.product.images?.[0] || "/images/placeholder.jpg"}
+                                                        alt={item.product.name}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
                                                 </div>
 
                                                 {/* Product Info */}

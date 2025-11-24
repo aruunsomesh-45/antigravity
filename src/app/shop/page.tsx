@@ -9,7 +9,7 @@ import { PerfumeFilter, type FilterState } from "@/components/PerfumeFilter";
 // Mock Data
 const PRODUCTS = [
     { id: "1", name: "Midnight Oud", price: 10500, image: "/midnight-oud.jpg", category: "Signature Collection", notes: "Oud, Rose, Amber", gender: "Men", design: "Classic", tags: ["Royal"] },
-    { id: "2", name: "Royal Rose", price: 12000, image: "/royal-rose.jpg", category: "Floral Collection", notes: "Rose, Peony, Musk", gender: "Women", design: "Classic", tags: ["Elegant"] },
+    { id: "2", name: "Royal Rose", price: 12000, image: "/images/eclaire-cgi.jpg", category: "Floral Collection", notes: "Rose, Peony, Musk", gender: "Women", design: "Classic", tags: ["Elegant"] },
     { id: "3", name: "Golden Amber", price: 15000, image: "/golden-amber-new.jpg", category: "Oud Collection", notes: "Amber, Vanilla, Sandalwood", gender: "Men", design: "Modern", tags: ["New Launch"] },
     { id: "4", name: "Velvet Santal", price: 12500, image: "/velvet-santal.jpg", category: "Signature Collection", notes: "Sandalwood, Cedar, Leather", gender: "Men", design: "Minimal", tags: ["Elegant"] },
     { id: "5", name: "Imperial Citrus", price: 9500, image: "/imperial-citrus.jpg", category: "Fresh Collection", notes: "Bergamot, Lemon, Neroli", gender: "Kids", design: "Minimal", tags: ["New Arrival"] },

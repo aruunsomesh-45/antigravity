@@ -52,7 +52,6 @@ export function SearchBar({ className }: SearchBarProps) {
     useEffect(() => {
         if (query.trim() === "") {
             setResults([]);
-            setIsOpen(false);
             return;
         }
 
@@ -67,7 +66,6 @@ export function SearchBar({ className }: SearchBarProps) {
         });
 
         setResults(filtered);
-        setIsOpen(filtered.length > 0);
     }, [query]);
 
     // Close dropdown when clicking outside
@@ -97,7 +95,7 @@ export function SearchBar({ className }: SearchBarProps) {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    onFocus={() => query && results.length > 0 && setIsOpen(true)}
+                    onFocus={() => results.length > 0 && setIsOpen(true)}
                     placeholder="Search perfumes..."
                     className="w-full pl-10 pr-10 py-2.5 bg-white/5 border border-white/10 rounded-lg text-cream-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-400/50 focus:border-gold-400 transition-all"
                     suppressHydrationWarning

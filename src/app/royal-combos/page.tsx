@@ -8,7 +8,7 @@ import { ImageMarquee } from "@/components/ImageMarquee";
 
 const MARQUEE_IMAGES = [
     "/midnight-oud.jpg",
-    "/royal-rose.jpg",
+    "/images/eclaire-cgi.jpg",
     "/golden-amber-new.jpg",
     "/velvet-santal.jpg",
     "/mystic-musk.jpg",

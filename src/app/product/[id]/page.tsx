@@ -5,19 +5,130 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Truck, ShieldCheck } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import Image from "next/image";
 
 // Mock Data (In real app, fetch from API)
 const PRODUCTS = {
     "1": {
         id: "1",
         name: "Midnight Oud",
-        price: 129.00,
+        price: 10500,
         description: "A mysterious and captivating fragrance that embodies the essence of the night. Rich oud notes blend seamlessly with velvety rose and warm amber to create a scent that is both powerful and elegant.",
         notes: { top: "Bergamot, Saffron", heart: "Rose, Oud", base: "Amber, Musk" },
-        images: ["/images/p1.jpg"]
+        images: ["/midnight-oud.jpg"]
     },
-    "2": { id: "2", name: "Royal Rose", price: 149.00, description: "An ode to the queen of flowers.", notes: { top: "Peony", heart: "Rose", base: "Musk" }, images: ["/images/p2.jpg"] },
-    // Add more mock data as needed
+    "2": {
+        id: "2",
+        name: "Royal Rose",
+        price: 12000,
+        description: "An ode to the queen of flowers. A timeless blend of fresh petals and warm musk.",
+        notes: { top: "Peony", heart: "Rose", base: "Musk" },
+        images: ["/images/eclaire-cgi.jpg"]
+    },
+    "3": {
+        id: "3",
+        name: "Golden Amber",
+        price: 15000,
+        description: "A warm and inviting scent that captures the glow of sunset. Rich amber and vanilla create a comforting embrace.",
+        notes: { top: "Amber", heart: "Vanilla", base: "Sandalwood" },
+        images: ["/golden-amber-new.jpg"]
+    },
+    "4": {
+        id: "4",
+        name: "Velvet Santal",
+        price: 12500,
+        description: "Smooth, woody, and sophisticated. A modern classic for the discerning individual.",
+        notes: { top: "Sandalwood", heart: "Cedar", base: "Leather" },
+        images: ["/velvet-santal.jpg"]
+    },
+    "5": {
+        id: "5",
+        name: "Imperial Citrus",
+        price: 9500,
+        description: "A burst of freshness that invigorates the senses. Bright citrus notes dance with delicate florals.",
+        notes: { top: "Bergamot", heart: "Lemon", base: "Neroli" },
+        images: ["/imperial-citrus.jpg"]
+    },
+    "6": {
+        id: "6",
+        name: "Mystic Musk",
+        price: 11000,
+        description: "Enigmatic and alluring. A soft, powdery musk that lingers on the skin like a secret.",
+        notes: { top: "Musk", heart: "Iris", base: "Tonka" },
+        images: ["/mystic-musk.jpg"]
+    },
+    "7": {
+        id: "7",
+        name: "Noir Leather",
+        price: 16000,
+        description: "Dark, intense, and undeniably masculine. A bold statement of confidence and power.",
+        notes: { top: "Leather", heart: "Tobacco", base: "Vetiver" },
+        images: ["/noir-leather.jpg"]
+    },
+    "8": {
+        id: "8",
+        name: "Azure Dreams",
+        price: 11500,
+        description: "Fresh as the ocean breeze. A revitalizing scent that transports you to the coast.",
+        notes: { top: "Sea Salt", heart: "Jasmine", base: "Driftwood" },
+        images: ["/azure-dreams.jpg"]
+    },
+    "9": {
+        id: "9",
+        name: "Crimson Velvet",
+        price: 14000,
+        description: "Passionate and romantic. A deep red rose scent enriched with earthy patchouli.",
+        notes: { top: "Red Rose", heart: "Patchouli", base: "Vanilla" },
+        images: ["/crimson-velvet.jpg"]
+    },
+    "10": {
+        id: "10",
+        name: "Platinum Essence",
+        price: 17500,
+        description: "The epitome of luxury. Rare oud and precious saffron combine for a truly opulent experience.",
+        notes: { top: "Oud", heart: "Saffron", base: "Ambergris" },
+        images: ["/platinum-essence.jpg"]
+    },
+    "11": {
+        id: "11",
+        name: "Silk Gardenia",
+        price: 13000,
+        description: "Soft, creamy, and elegant. The delicate scent of gardenia wrapped in smooth cashmere.",
+        notes: { top: "Gardenia", heart: "White Tea", base: "Cashmere" },
+        images: ["/silk-gardenia.jpg"]
+    },
+    "12": {
+        id: "12",
+        name: "Spiced Ember",
+        price: 12500,
+        description: "Warm and spicy. A cozy fragrance that ignites the spirit with notes of cardamom and incense.",
+        notes: { top: "Cardamom", heart: "Cinnamon", base: "Incense" },
+        images: ["/spiced-ember.jpg"]
+    },
+    "13": {
+        id: "13",
+        name: "Ocean Mist",
+        price: 10800,
+        description: "Cool and refreshing. A light, airy scent perfect for everyday wear.",
+        notes: { top: "Marine Accord", heart: "Mint", base: "Cedar" },
+        images: ["/ocean-mist.jpg"]
+    },
+    "14": {
+        id: "14",
+        name: "Black Orchid",
+        price: 16800,
+        description: "Exotic and mysterious. A dark floral fragrance with a hint of gourmand sweetness.",
+        notes: { top: "Black Orchid", heart: "Plum", base: "Dark Chocolate" },
+        images: ["/black-orchid.jpg"]
+    },
+    "15": {
+        id: "15",
+        name: "Desert Rose",
+        price: 14500,
+        description: "A rose blooming in the desert. Spicy and resinous notes add depth to this classic floral.",
+        notes: { top: "Damask Rose", heart: "Myrrh", base: "Frankincense" },
+        images: ["/desert-rose.jpg"]
+    },
 };
 
 export default function ProductPage() {
@@ -58,9 +169,19 @@ export default function ProductPage() {
                     animate={{ opacity: 1, x: 0 }}
                     className="aspect-[3/4] bg-white/5 relative overflow-hidden rounded-sm"
                 >
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-600">
-                        <span className="uppercase tracking-widest">Product Image</span>
-                    </div>
+                    {product.images && product.images.length > 0 ? (
+                        <Image
+                            src={product.images[0]}
+                            alt={product.name}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-gray-600">
+                            <span className="uppercase tracking-widest">Product Image</span>
+                        </div>
+                    )}
                 </motion.div>
 
                 {/* Details Section */}
@@ -72,7 +193,7 @@ export default function ProductPage() {
                     <div>
                         <h1 className="text-4xl md:text-5xl font-serif text-cream-100 mb-4">{product.name}</h1>
                         <div className="flex items-center gap-4 mb-6">
-                            <span className="text-2xl text-gold-400">${product.price.toFixed(2)}</span>
+                            <span className="text-2xl text-gold-400">₹{product.price.toLocaleString()}</span>
                             <div className="flex text-gold-400">
                                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                             </div>
@@ -119,8 +240,8 @@ export default function ProductPage() {
                             <button
                                 onClick={handleAddToCart}
                                 className={`flex-1 py-3 px-8 font-medium uppercase tracking-widest transition-all ${isAdded
-                                        ? 'bg-green-500 text-white'
-                                        : 'bg-gold-400 text-black hover:bg-gold-300'
+                                    ? 'bg-green-500 text-white'
+                                    : 'bg-gold-400 text-black hover:bg-gold-300'
                                     }`}
                             >
                                 {isAdded ? '✓ Added to Cart!' : 'Add to Cart'}

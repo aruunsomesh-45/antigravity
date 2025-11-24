@@ -246,16 +246,10 @@ function GalleryScene({
         loadTextures();
     }, [normalizedImages]);
 
-    // Create materials pool
     const materials = useMemo(
         () => Array.from({ length: visibleCount }, () => createClothMaterial()),
         [visibleCount]
     );
-
-    if (isLoading) return null;
-    if (loadedTextures.length === 0) return null;
-
-    const textures = loadedTextures;
 
     const spatialPositions = useMemo(() => {
         const positions: { x: number; y: number }[] = [];
@@ -295,6 +289,12 @@ function GalleryScene({
             y: spatialPositions[i]?.y ?? 0, // Use spatial positions for y
         }))
     );
+
+    // Early returns AFTER all hooks
+    if (isLoading) return null;
+    if (loadedTextures.length === 0) return null;
+
+    const textures = loadedTextures;
 
     useEffect(() => {
         planesData.current = Array.from({ length: visibleCount }, (_, i) => ({

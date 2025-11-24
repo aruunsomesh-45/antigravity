@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const FEATURED_PRODUCTS = [
   { id: "1", name: "Midnight Oud", price: 129.00, image: "/midnight-oud.jpg", category: "Signature Collection" },
-  { id: "2", name: "Royal Rose", price: 149.00, image: "/royal-rose.jpg", category: "Floral Collection" },
+  { id: "2", name: "Royal Rose", price: 149.00, image: "/images/eclaire-cgi.jpg", category: "Floral Collection" },
   { id: "3", name: "Golden Amber", price: 189.00, image: "/golden-amber-new.jpg", category: "Oud Collection" },
   { id: "4", name: "Velvet Santal", price: 159.00, image: "/velvet-santal.jpg", category: "Signature Collection" },
 ];
