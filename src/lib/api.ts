@@ -1,4 +1,5 @@
 // API utility functions for making requests to the backend
+import { Product, Collection, Order, CartItem, CreateOrderInput } from '@/types';
 
 const API_BASE_URL = '/api';
 
@@ -27,29 +28,29 @@ async function fetchAPI<T>(
 export const productAPI = {
     getAll: (filters?: Record<string, string>) => {
         const params = new URLSearchParams(filters);
-        return fetchAPI<any[]>(`/products?${params}`);
+        return fetchAPI<Product[]>(`/products?${params}`);
     },
 
     getBySlug: (slug: string) => {
-        return fetchAPI<any>(`/products/${slug}`);
+        return fetchAPI<Product>(`/products/${slug}`);
     },
 
-    create: (data: any) => {
-        return fetchAPI<any>('/products', {
+    create: (data: Partial<Product>) => {
+        return fetchAPI<Product>('/products', {
             method: 'POST',
             body: JSON.stringify(data),
         });
     },
 
-    update: (slug: string, data: any) => {
-        return fetchAPI<any>(`/products/${slug}`, {
+    update: (slug: string, data: Partial<Product>) => {
+        return fetchAPI<Product>(`/products/${slug}`, {
             method: 'PUT',
             body: JSON.stringify(data),
         });
     },
 
     delete: (slug: string) => {
-        return fetchAPI<any>(`/products/${slug}`, {
+        return fetchAPI<void>(`/products/${slug}`, {
             method: 'DELETE',
         });
     },
@@ -58,29 +59,29 @@ export const productAPI = {
 // Collection API
 export const collectionAPI = {
     getAll: () => {
-        return fetchAPI<any[]>('/collections');
+        return fetchAPI<Collection[]>('/collections');
     },
 
     getBySlug: (slug: string) => {
-        return fetchAPI<any>(`/collections/${slug}`);
+        return fetchAPI<Collection>(`/collections/${slug}`);
     },
 
-    create: (data: any) => {
-        return fetchAPI<any>('/collections', {
+    create: (data: Partial<Collection>) => {
+        return fetchAPI<Collection>('/collections', {
             method: 'POST',
             body: JSON.stringify(data),
         });
     },
 
-    update: (slug: string, data: any) => {
-        return fetchAPI<any>(`/collections/${slug}`, {
+    update: (slug: string, data: Partial<Collection>) => {
+        return fetchAPI<Collection>(`/collections/${slug}`, {
             method: 'PUT',
             body: JSON.stringify(data),
         });
     },
 
     delete: (slug: string) => {
-        return fetchAPI<any>(`/collections/${slug}`, {
+        return fetchAPI<void>(`/collections/${slug}`, {
             method: 'DELETE',
         });
     },
@@ -89,22 +90,22 @@ export const collectionAPI = {
 // Order API
 export const orderAPI = {
     getAll: () => {
-        return fetchAPI<any[]>('/orders');
+        return fetchAPI<Order[]>('/orders');
     },
 
     getById: (id: string) => {
-        return fetchAPI<any>(`/orders/${id}`);
+        return fetchAPI<Order>(`/orders/${id}`);
     },
 
-    create: (data: any) => {
-        return fetchAPI<any>('/orders', {
+    create: (data: CreateOrderInput) => {
+        return fetchAPI<Order>('/orders', {
             method: 'POST',
             body: JSON.stringify(data),
         });
     },
 
     updateStatus: (id: string, status: string) => {
-        return fetchAPI<any>(`/orders/${id}`, {
+        return fetchAPI<Order>(`/orders/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ status }),
         });
@@ -121,7 +122,7 @@ export function formatPrice(price: number): string {
 }
 
 // Helper function to calculate cart total
-export function calculateCartTotal(items: any[]): number {
+export function calculateCartTotal(items: CartItem[]): number {
     return items.reduce((total, item) => {
         return total + (Number(item.product?.price || 0) * item.quantity);
     }, 0);

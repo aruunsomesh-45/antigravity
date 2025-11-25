@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 // GET /api/products - Get all products with optional filters
 export async function GET(request: Request) {
@@ -10,7 +11,7 @@ export async function GET(request: Request) {
         const isNew = searchParams.get('new');
         const search = searchParams.get('search');
 
-        const where: any = {};
+        const where: Prisma.ProductWhereInput = {};
 
         if (category) {
             where.category = {
@@ -28,8 +29,8 @@ export async function GET(request: Request) {
 
         if (search) {
             where.OR = [
-                { name: { contains: search, mode: 'insensitive' } },
-                { description: { contains: search, mode: 'insensitive' } },
+                { name: { contains: search, mode: 'insensitive' as any } },
+                { description: { contains: search, mode: 'insensitive' as any } },
             ];
         }
 

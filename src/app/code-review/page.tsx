@@ -65,8 +65,12 @@ export default function CodeReviewPage() {
                 setResult(reviewContent);
             }
 
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
         } finally {
             setLoading(false);
         }
@@ -179,14 +183,14 @@ export default function CodeReviewPage() {
                         <div className="prose prose-invert prose-gold max-w-none">
                             <ReactMarkdown
                                 components={{
-                                    code({ node, inline, className, children, ...props }: any) {
+                                    code({ node, inline, className, children, ...props }: React.ComponentPropsWithoutRef<'code'> & { inline?: boolean; node?: any }) {
                                         return (
                                             <code className={`${className} bg-black/50 px-1.5 py-0.5 rounded text-gold-200 font-mono text-sm`} {...props}>
                                                 {children}
                                             </code>
                                         )
                                     },
-                                    pre({ node, children, ...props }: any) {
+                                    pre({ node, children, ...props }: React.ComponentPropsWithoutRef<'pre'> & { node?: any }) {
                                         return (
                                             <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto border border-white/10 my-4" {...props}>
                                                 {children}

@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { orderAPI, formatPrice } from '@/lib/api';
+import { Order, OrderItem } from '@/types';
 
 export default function OrderConfirmationPage() {
     const params = useParams();
     const router = useRouter();
-    const [order, setOrder] = useState<any>(null);
+    const [order, setOrder] = useState<Order | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -121,13 +122,13 @@ export default function OrderConfirmationPage() {
                     <div>
                         <h2 className="text-xl font-bold mb-4 text-gold">Order Items</h2>
                         <div className="space-y-4">
-                            {order.items?.map((item: any) => (
+                            {order.items?.map((item: OrderItem) => (
                                 <div
                                     key={item.id}
                                     className="flex justify-between items-start pb-4 border-b border-gold/10 last:border-0"
                                 >
                                     <div className="flex-1">
-                                        <h3 className="font-semibold">{item.product.name}</h3>
+                                        <h3 className="font-semibold">{item.product?.name || 'Product'}</h3>
                                         <p className="text-sm text-cream/60">Quantity: {item.quantity}</p>
                                         <p className="text-sm text-cream/60">
                                             Price: {formatPrice(Number(item.price))}

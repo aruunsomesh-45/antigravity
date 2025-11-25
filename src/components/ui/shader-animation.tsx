@@ -9,7 +9,8 @@ export function ShaderAnimation() {
         camera: THREE.Camera
         scene: THREE.Scene
         renderer: THREE.WebGLRenderer
-        uniforms: any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        uniforms: Record<string, { value: any }>
         animationId: number
     } | null>(null)
 

@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { productAPI, collectionAPI, formatPrice } from '@/lib/api';
+import { Product, Collection } from '@/types';
 
 export default function APITestPage() {
-    const [products, setProducts] = useState<any[]>([]);
-    const [collections, setCollections] = useState<any[]>([]);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [collections, setCollections] = useState<Collection[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -15,8 +16,12 @@ export default function APITestPage() {
         try {
             const data = await productAPI.getAll();
             setProducts(data);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
         } finally {
             setLoading(false);
         }
@@ -28,8 +33,12 @@ export default function APITestPage() {
         try {
             const data = await collectionAPI.getAll();
             setCollections(data);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('An unknown error occurred');
+            }
         } finally {
             setLoading(false);
         }

@@ -63,6 +63,14 @@ export interface Address {
     country: string;
 }
 
+export interface CreateOrderInput {
+    items: { productId: string; quantity: number }[];
+    customerName: string;
+    customerEmail: string;
+    address: Address;
+    userId?: string;
+}
+
 // User Types
 export interface User {
     id: string;
