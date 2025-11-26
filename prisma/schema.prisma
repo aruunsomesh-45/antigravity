@@ -12,7 +12,7 @@ model Product {
   name        String
   slug        String      @unique
   description String
-  price       Decimal
+  price       Decimal     @db.Decimal(10, 2)
   images      String[]
   stock       Int
   notes       Json?
@@ -23,6 +23,12 @@ model Product {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@index([isNew])
+  @@index([createdAt])
 }
 
 model Collection {
@@ -32,12 +38,14 @@ model Collection {
   description String?
   image       String?
   products    Product[]
+
+  @@index([slug])
 }
 
 model Order {
   id            String      @id @default(cuid())
   userId        String?
-  total         Decimal
+  total         Decimal     @db.Decimal(10, 2)
   status        OrderStatus @default(PENDING)
   customerName  String
   customerEmail String
@@ -45,16 +53,24 @@ model Order {
   items         OrderItem[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([customerEmail])
+  @@index([createdAt])
 }
 
 model OrderItem {
   id        String  @id @default(cuid())
   orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
   quantity  Int
-  price     Decimal
+  price     Decimal @db.Decimal(10, 2)
+
+  @@index([orderId])
+  @@index([productId])
 }
 
 enum OrderStatus {

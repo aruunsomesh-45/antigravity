@@ -26,7 +26,8 @@ const COMBOS = [
         category: "Royal Combo",
         description: "Midnight Oud + Royal Rose",
         backstory: "A union of strength and grace. The deep, resinous notes of Midnight Oud provide a powerful foundation, while Royal Rose adds a velvet-soft floral heart. Together, they create a scent of commanding elegance.",
-        savings: 2500
+        savings: 2500,
+        stock: 50
     },
     {
         id: "combo2",
@@ -36,7 +37,8 @@ const COMBOS = [
         category: "Royal Combo",
         description: "Midnight Oud + Golden Amber + Mystic Musk",
         backstory: "A journey through the desert's most precious treasures. From the dark intensity of Midnight Oud to the warm glow of Golden Amber and the ethereal touch of Mystic Musk. A complete olfactory wardrobe for the connoisseur.",
-        savings: 5000
+        savings: 5000,
+        stock: 50
     },
     {
         id: "combo3",
@@ -46,7 +48,8 @@ const COMBOS = [
         category: "Royal Combo",
         description: "All 4 Signature Scents",
         backstory: "The ultimate expression of Zoku's artistry. This collection brings together our four most iconic signatures, allowing you to wear a different masterpiece for every mood and occasion.",
-        savings: 8000
+        savings: 8000,
+        stock: 50
     },
 ];
 
@@ -60,11 +63,11 @@ export default function RoyalCombosPage() {
             product: {
                 id: combo.id,
                 name: combo.name,
-                slug: combo.id,
+                slug: combo.name.toLowerCase().replace(/\s+/g, '-'),
                 price: combo.price,
                 images: [combo.image],
                 description: combo.backstory,
-                stock: 100,
+                stock: combo.stock,
                 category: {
                     id: combo.category,
                     name: combo.category,
@@ -72,7 +75,6 @@ export default function RoyalCombosPage() {
                 },
             },
         });
-
         // Show feedback
         setAddedItems(prev => new Set(prev).add(combo.id));
         setTimeout(() => {
@@ -126,7 +128,7 @@ export default function RoyalCombosPage() {
 
             {/* Combos Grid */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md: grid-cols-2 lg:grid-cols-3 gap-8">
                     {COMBOS.map((combo, index) => {
                         const isAdded = addedItems.has(combo.id);
                         const hasImageError = imageErrors.has(combo.id);

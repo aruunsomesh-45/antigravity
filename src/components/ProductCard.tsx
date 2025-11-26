@@ -13,6 +13,8 @@ interface Product {
     image: string;
     category: string;
     tags?: string[];
+    description?: string;
+    stock?: number;
 }
 
 export function ProductCard({ product }: { product: Product }) {
@@ -28,11 +30,11 @@ export function ProductCard({ product }: { product: Product }) {
             product: {
                 id: product.id,
                 name: product.name,
-                slug: product.id,
+                slug: product.name.toLowerCase().replace(/\s+/g, '-'),
                 price: product.price,
                 images: [product.image],
-                description: product.category,
-                stock: 100,
+                description: product.description ?? product.category,
+                stock: product.stock ?? 100,
                 category: {
                     id: product.category,
                     name: product.category,
@@ -40,7 +42,6 @@ export function ProductCard({ product }: { product: Product }) {
                 },
             },
         });
-
         // Show feedback
         setIsAdded(true);
         setTimeout(() => setIsAdded(false), 2000);

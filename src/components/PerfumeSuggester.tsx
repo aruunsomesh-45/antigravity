@@ -18,6 +18,7 @@ interface Product {
     gender: string;
     longevity?: string;
     story: string;
+    stock?: number;
 }
 
 // All products with their stories
@@ -230,19 +231,18 @@ export function PerfumeSuggester() {
             product: {
                 id: product.id,
                 name: product.name,
-                slug: product.id,
+                slug: product.name.toLowerCase().replace(/\s+/g, '-'),
                 price: product.price,
                 images: [product.image],
                 description: product.notes,
-                stock: 100,
+                stock: product.stock ?? 100,
                 category: {
                     id: product.category,
                     name: product.category,
                     slug: product.category.toLowerCase().replace(/\s+/g, '-'),
                 },
             },
-        });
-        setAddedToCart((prev) => [...prev, product.id]);
+        }); setAddedToCart((prev) => [...prev, product.id]);
 
         setTimeout(() => {
             setAddedToCart((prev) => prev.filter((id) => id !== product.id));

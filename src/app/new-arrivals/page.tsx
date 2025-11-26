@@ -25,7 +25,8 @@ const NEW_ARRIVALS = [
         price: 13500,
         image: "/perfume-1.jpg",
         category: "Fresh Collection",
-        backstory: "Born from the morning dew on high-altitude blossoms. This scent captures the fleeting moment of dawn, offering a crisp, airy freshness that lingers like a memory."
+        backstory: "Born from the morning dew on high-altitude blossoms. This scent captures the fleeting moment of dawn, offering a crisp, airy freshness that lingers like a memory.",
+        stock: 100
     },
     {
         id: "6",
@@ -33,7 +34,8 @@ const NEW_ARRIVALS = [
         price: 15500,
         image: "/perfume-2.jpg",
         category: "Spice Collection",
-        backstory: "A fiery tribute to the ancient spice routes. Warm saffron and fiery cinnamon dance with deep red roses, creating a fragrance that is both comforting and dangerously seductive."
+        backstory: "A fiery tribute to the ancient spice routes. Warm saffron and fiery cinnamon dance with deep red roses, creating a fragrance that is both comforting and dangerously seductive.",
+        stock: 100
     },
     {
         id: "7",
@@ -41,7 +43,8 @@ const NEW_ARRIVALS = [
         price: 12500,
         image: "/perfume-3.jpg",
         category: "Aqua Collection",
-        backstory: "The spirit of the open sea. Salty air, driftwood, and a hint of citrus combine to transport you to a secluded coastline where the waves meet the sky."
+        backstory: "The spirit of the open sea. Salty air, driftwood, and a hint of citrus combine to transport you to a secluded coastline where the waves meet the sky.",
+        stock: 100
     },
     {
         id: "8",
@@ -49,7 +52,8 @@ const NEW_ARRIVALS = [
         price: 17500,
         image: "/noir-leather.jpg",
         category: "Signature Collection",
-        backstory: "Dark, mysterious, and undeniably masculine. Rich leather accords blend with smoky tobacco and vetiver for a scent that commands attention and respect."
+        backstory: "Dark, mysterious, and undeniably masculine. Rich leather accords blend with smoky tobacco and vetiver for a scent that commands attention and respect.",
+        stock: 100
     },
 ];
 
@@ -66,7 +70,7 @@ export default function NewArrivalsPage() {
                 price: product.price,
                 images: [product.image],
                 description: product.backstory,
-                stock: 100,
+                stock: product.stock,
                 category: {
                     id: product.category,
                     name: product.category,
