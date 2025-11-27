@@ -2,9 +2,10 @@
 
 import { ProductCard } from "@/components/ProductCard";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { PerfumeFilter, type FilterState } from "@/components/PerfumeFilter";
+import { useSearchParams } from "next/navigation";
 
 // Mock Data
 const PRODUCTS = [
@@ -44,7 +45,10 @@ const PERFUME_IMAGES = [
     "/imperial-citrus.jpg",
 ];
 
-export default function ShopPage() {
+function ShopContent() {
+    const searchParams = useSearchParams();
+    const searchQuery = searchParams.get("search")?.toLowerCase() || "";
+
     const [filters, setFilters] = useState<FilterState>({
         priceRange: [0, 50000],
         collection: "All",
@@ -53,13 +57,19 @@ export default function ShopPage() {
     });
 
     const filteredProducts = PRODUCTS.filter(product => {
+        // Filter by Search Query
+        if (searchQuery) {
+            const matchesSearch =
+                product.name.toLowerCase().includes(searchQuery) ||
+                product.notes.toLowerCase().includes(searchQuery) ||
+                product.category.toLowerCase().includes(searchQuery) ||
+                product.gender.toLowerCase().includes(searchQuery);
+
+            if (!matchesSearch) return false;
+        }
+
         // Filter by Collection
         if (filters.collection !== "All") {
-            // Map "Luxury", "Premium", "Everyday" to actual collections if needed
-            // For now, let's assume "Luxury" maps to Signature/Oud, "Premium" to Floral/Oriental, "Everyday" to Fresh/Spice
-            // Or simply match exact string if we updated product categories to match.
-            // Since product categories are "Signature Collection" etc, and filter is "Luxury" etc., we need a mapping.
-            // Let's map for demonstration:
             const luxury = ["Signature Collection", "Oud Collection"];
             const premium = ["Floral Collection", "Oriental Collection"];
             const everyday = ["Fresh Collection", "Spice Collection"];
@@ -82,6 +92,49 @@ export default function ShopPage() {
     });
 
     return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="flex flex-col md:flex-row gap-12">
+                {/* Sidebar Filters */}
+                <aside className="w-full md:w-72 shrink-0">
+                    <div className="sticky top-24">
+                        <PerfumeFilter onFilterChange={setFilters} />
+                    </div>
+                </aside>
+
+                {/* Product Grid */}
+                <div className="flex-1">
+                    <div className="flex justify-between items-center mb-8">
+                        <h1 className="text-2xl font-serif text-cream-100">
+                            {searchQuery ? `Search Results for "${searchQuery}"` : "Shop All"}
+                        </h1>
+                        <span className="text-gray-400 text-sm">{filteredProducts.length} Products</span>
+                    </div>
+
+                    {filteredProducts.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filteredProducts.map((product) => (
+                                <ProductCard key={product.id} product={{ ...product, price: product.price }} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-20 text-gray-400">
+                            <p className="text-lg">No products match your filters.</p>
+                            <button
+                                onClick={() => window.location.href = '/shop'}
+                                className="mt-4 text-gold-400 hover:underline"
+                            >
+                                Clear all filters
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function ShopPage() {
+    return (
         <>
             {/* Hero Section */}
             <AnimatedMarqueeHero
@@ -99,43 +152,10 @@ export default function ShopPage() {
                 className="bg-black"
             />
 
-            {/* Shop Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="flex flex-col md:flex-row gap-12">
-                    {/* Sidebar Filters */}
-                    <aside className="w-full md:w-72 shrink-0">
-                        <div className="sticky top-24">
-                            <PerfumeFilter onFilterChange={setFilters} />
-                        </div>
-                    </aside>
-
-                    {/* Product Grid */}
-                    <div className="flex-1">
-                        <div className="flex justify-between items-center mb-8">
-                            <h1 className="text-2xl font-serif text-cream-100">Shop All</h1>
-                            <span className="text-gray-400 text-sm">{filteredProducts.length} Products</span>
-                        </div>
-
-                        {filteredProducts.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {filteredProducts.map((product) => (
-                                    <ProductCard key={product.id} product={{ ...product, price: product.price }} />
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center py-20 text-gray-400">
-                                <p className="text-lg">No products match your filters.</p>
-                                <button
-                                    onClick={() => window.location.reload()}
-                                    className="mt-4 text-gold-400 hover:underline"
-                                >
-                                    Clear all filters
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
+            {/* Shop Content with Suspense for useSearchParams */}
+            <Suspense fallback={<div className="min-h-screen bg-black" />}>
+                <ShopContent />
+            </Suspense>
         </>
     );
 }
